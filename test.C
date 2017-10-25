@@ -1,6 +1,6 @@
 #include <iostream>
 //#include <sys/types.h> //manejo de archivos y carpetas
-//#include "/usr/include/i386-linux-gnu/sys/stat.h" ////manejo de archivos y carpetas
+//#include "/usr/include/i386-linux-gnu/sys/stat.h" ////manejo de archivos y carpetasasdad
 #include <assert.h>//manejo de errores
 #include <string>
 #include <cstring>
