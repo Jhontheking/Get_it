@@ -14,8 +14,8 @@ FLAGS = -g -O0 -std=c++14 $(WARN)
 INCLUDE = -I. -I $(ALEPH) 
 
 LIBS = -L $(ALEPH) \
-       -lAleph -lm -lgsl -lgslcblas -lgmp -lmpfr -lasprintf -lpthread -lc
-
+       -lm -lgsl -lgslcblas -lgmp -lmpfr -lasprintf -lpthread -lc
+#-lAleph 
 all: test
 
 test: test.C file_address_tree.H 

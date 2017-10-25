@@ -1,6 +1,6 @@
 #include <iostream>
-#include <sys/types.h> //manejo de archivos y carpetas
-#include "/usr/include/i386-linux-gnu/sys/stat.h" ////manejo de archivos y carpetas
+//#include <sys/types.h> //manejo de archivos y carpetas
+//#include "/usr/include/i386-linux-gnu/sys/stat.h" ////manejo de archivos y carpetas
 #include <assert.h>//manejo de errores
 #include <string>
 #include <cstring>
@@ -59,8 +59,24 @@ cin.ignore();
     j=0;
   }
 
+int x=1;
+while(x!=0){
+string label;
+  cout << "\nIntroduzca lo que esea buscar:  ";
+  getline(cin,label);
 
-
+ DynList<Node *> list= z->search_tree(label);
+  cout<< "resultado de la busqueda"<<endl; 
+    auto print_key = [] (Node * clave)
+      {
+        cout << " (" << get<0>(clave->get_data())<<" "<< get<1>(clave->get_data())<<")"<<endl;
+      };
+list.for_each(print_key);
+cout << "\ndesea salir Introduzca 0 para continuar buscando ingresar cualquier otro numero:  ";
+  cin>>x;
+  cin.ignore();
+}
+/*
   ///Búsqueda
 
   string label;
@@ -68,7 +84,7 @@ cin.ignore();
   cin >> label;
 
   auto found = z->Searh_Label(z->Get_root(), label);
- cout << "\nIntroduzca etiqueta a buscar 1:  ";
+ cout << "\nIntroduzca etiqueta a buscar 2:  ";
   cin >> label;
 
   auto foundd = z->Searh_Label(z->Get_root(), label);
@@ -93,20 +109,31 @@ list.for_each(print_key);
   {
     cout <<"Clave no encontrada" << endl;
   }
+*/
+/*cout << "\nárbol antes de borrar: " << endl;
+
+  z->printf_tree(z->Get_root());
+  cout << endl;
+//delete
+
+  string label;
+  cout << "\nIntroduzca elemento a eliminar de la fomar etiqueta.archivo:  ";
+  cin >> label;
+z->delete_node(label);
 
 
+cout << "\nárbol despues de borrar: " << endl;
 
-
-
-
-
+  z->printf_tree(z->Get_root());
+  cout << endl;
+*/
   cout << "\nárbol final: " << endl;
 
   z->printf_tree(z->Get_root());
   cout << endl;
   return 0;
 }
-bool path_is_file(char * path) 
+/*bool path_is_file(char * path) 
 {
  struct stat st_info; 
  assert(path != nullptr);
@@ -120,4 +147,4 @@ void to_charp(char *& cstr, const string & linea)
 {
  cstr = new char [linea.length()+1];
  strcpy (cstr, linea.c_str());
-}
+}*/
