@@ -1,7 +1,7 @@
 #ifndef file_address_tree_H
 #define file_address_tree_H
 #include <iostream>
-//#include <sys/types.h> //manejo de archivos y carpetas
+//#include <sys/types.h> //manejo de archivos y carpetasmmm
 //#include "/usr/include/i386-linux-gnu/sys/stat.h" ////manejo de archivos y carpetas
 #include <assert.h>//manejo de errores
 #include <string>
