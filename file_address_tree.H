@@ -1,10 +1,12 @@
 #ifndef file_address_tree_H
 #define file_address_tree_H
 #include <iostream>
-//#include <sys/types.h> //manejo de archivos y carpetasmmm
-//#include "/usr/include/i386-linux-gnu/sys/stat.h" ////manejo de archivos y carpetas
+#include <sys/types.h> //manejo de archivos y carpetasmmm
+//#include "/usr/include/i386-linux-gnu/sys/stat.h" ////manejo de archivos y carpetas este es ubuntu 32bits
+#include "/usr/include/x86_64-linux-gnu/sys/stat.h"//este es para ubuntu 64 bits
 #include <assert.h>//manejo de errores
 #include <string>
+#include <fstream> //manejo de archivos
 #include <cstring>
 #include <tuple>
 #include <tpl_tree_node.H>
@@ -36,6 +38,135 @@ class file_address_tree
 private:
 	Node * root;
 public:
+file_address_tree()
+{
+	DynList<string> list;
+	char* env_p = getenv("HOME");
+	string str(env_p); 
+	Node * root=new Node(make_tuple(str, true));
+	this->Get_root()=root;
+	string aux2 = "find " + str.append("/Documentos  > lista.txt");
+	char * aux3;
+	to_charp(aux3,aux2);
+	system(aux3);
+ 	ifstream archivo("lista.txt", ifstream::in);
+ 	string linea;
+ 	char * aux;
+ 	while(!archivo.eof())
+  {
+   getline(archivo,linea);
+    // cout << linea << endl;
+   to_charp(aux,linea);
+   if (path_is_file(aux))
+   {
+    list.append(linea);
+   }
+ }
+ archivo.close();
+ 	this->SetLabel("Documentos",list);
+ 	list.empty();
+ 	str.erase (str.rfind("/"),str.length()); 
+ 	aux2 = "find " + str.append("/Imágenes  > lista.txt");
+ 	cout<<aux2<<endl;
+	to_charp(aux3,aux2);
+	system(aux3);
+ archivo.open("lista.txt");
+ 	while(!archivo.eof())
+  {
+   getline(archivo,linea);
+    // cout << linea << endl;
+   to_charp(aux,linea);
+   if (path_is_file(aux))
+   {
+    list.append(linea);
+   }
+ }
+ archivo.close();
+ 	this->SetLabel("Imágenes",list);
+
+	list.empty();
+ 	str.erase (str.rfind("/"),str.length()); 
+ 	aux2 = "find " + str.append("/Descargas  > lista.txt");
+ 	cout<<aux2<<endl;
+	to_charp(aux3,aux2);
+	system(aux3);
+ archivo.open("lista.txt");
+ 	while(!archivo.eof())
+  {
+   getline(archivo,linea);
+    // cout << linea << endl;
+   to_charp(aux,linea);
+   if (path_is_file(aux))
+   {
+    list.append(linea);
+   }
+ }
+ archivo.close();
+ 	this->SetLabel("Descargas",list);
+
+ 	list.empty();
+ 	str.erase (str.rfind("/"),str.length()); 
+ 	aux2 = "find " + str.append("/Escritorio  > lista.txt");
+ 	cout<<aux2<<endl;
+	to_charp(aux3,aux2);
+	system(aux3);
+ archivo.open("lista.txt");
+ 	while(!archivo.eof())
+  {
+   getline(archivo,linea);
+    // cout << linea << endl;
+   to_charp(aux,linea);
+   if (path_is_file(aux))
+   {
+    list.append(linea);
+   }
+ }
+ archivo.close();
+ 	this->SetLabel("Escritorio",list);
+
+list.empty();
+ 	str.erase (str.rfind("/"),str.length()); 
+ 	aux2 = "find " + str.append("/Música  > lista.txt");
+ 	cout<<aux2<<endl;
+	to_charp(aux3,aux2);
+	system(aux3);
+ archivo.open("lista.txt");
+ 	while(!archivo.eof())
+  {
+   getline(archivo,linea);
+    // cout << linea << endl;
+   to_charp(aux,linea);
+   if (path_is_file(aux))
+   {
+    list.append(linea);
+   }
+ }
+ archivo.close();
+ 	this->SetLabel("Música",list);
+
+ 	list.empty();
+ 	str.erase (str.rfind("/"),str.length()); 
+ 	aux2 = "find " + str.append("/Vídeos  > lista.txt");
+ 	cout<<aux2<<endl;
+	to_charp(aux3,aux2);
+	system(aux3);
+ archivo.open("lista.txt");
+ 	while(!archivo.eof())
+  {
+   getline(archivo,linea);
+    // cout << linea << endl;
+   to_charp(aux,linea);
+   if (path_is_file(aux))
+   {
+    list.append(linea);
+   }
+ }
+ archivo.close();
+ 	this->SetLabel("Vídeos",list);
+
+
+ 	system("rm lista.txt");
+}
 file_address_tree(Node *& root){this->Get_root()=root;}
 ~file_address_tree();
 Node *& Get_root(){return this->root;}
@@ -252,7 +383,7 @@ void printf_tree(Node * root)
 este es un metodo que detecta si una direccion que se le pase es un archivo o una carpeta en estos momentos no se esta utilizando ya que se implemento en una vercion 
 anterior que se realizo y pues decidi dejarla por si acaso se va autilizar mas adelante ella necesita de estas cabeceras para funconar
 //#include <sys/types.h> //manejo de archivos y carpetas
-//#include "/usr/include/i386-linux-gnu/sys/stat.h" ////manejo de archivos y carpetas
+//#include "/usr/include/i386-linux-gnu/sys/stat.h" ////manejo de archivos y carpetas*/
 bool path_is_file(char * path)
 {
  struct stat st_info;
@@ -267,6 +398,6 @@ void to_charp(char *& cstr, const string & linea)
 {
  cstr = new char [linea.length()+1];
  strcpy (cstr, linea.c_str());
-}*/
+}
 };
 #endif
